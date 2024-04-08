@@ -154,7 +154,7 @@ fun EmailTextField(
         Text(
             modifier = Modifier.padding(start = 16.dp),
             color = Color.Gray,
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = SemiBold,
             text = "Email address"
         )
         TextField(
@@ -189,7 +189,7 @@ fun PasswordTextField(
         Text(
             modifier = Modifier.padding(start = 16.dp),
             color = Color.Gray,
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = SemiBold,
             text = "Password"
         )
 
