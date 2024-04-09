@@ -47,34 +47,51 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.karolina.jetpack.foodorder.R
 import com.karolina.jetpack.foodorder.data.ItemDetail
+import com.karolina.jetpack.foodorder.data.UiState
+import com.karolina.jetpack.foodorder.data.samples.sampleHeader
+import com.karolina.jetpack.foodorder.data.samples.sampleHomeData
 import com.karolina.jetpack.foodorder.ui.theme.Green800
 import com.karolina.jetpack.foodorder.ui.theme.Neutral900
 
 @Composable
 fun HomeScreen(
-    // data
-    onItemClick: () -> Unit,
+    data: UiState.Home,
+    onItemClick: (ItemDetail) -> Unit,
     onProfileClick: () -> Unit,
     onSearch: (String) -> Unit
 ) {
+
     val scrollState = rememberScrollState()
     var text by remember {
         mutableStateOf("")
     }
+    var selectedCategoryTab by rememberSaveable {
+        mutableStateOf("Pizza")
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
             .padding(start = 2.dp, bottom = 10.dp, end = 2.dp)
     ) {
-        HomeHeader()
-        WelcomeText()
+        HomeHeader(address = data.userData.address, onProfileClick = onProfileClick)
+        WelcomeText(name = data.userData.name)
         SearchField(text = text, onSearch = {
             text = it
             onSearch(it)
         })
         PromotionAds()
-        OfferList()
+        OfferList(
+            headers = sampleHeader,
+            products = data.products,
+            selectedCategoryTab = selectedCategoryTab,
+            onTabClick = {category ->
+                         selectedCategoryTab = category
+                
+            },
+            onItemClick = onItemClick
+        )
     }
 }
 
@@ -303,7 +320,10 @@ fun HomeHeaderPreview() {
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen(onItemClick = { /*TODO*/ }, onProfileClick = { /*TODO*/ }) {
+    HomeScreen(
+        data = sampleHomeData,
+        onItemClick = { /*TODO*/ },
+        onProfileClick = { /*TODO*/ }) {
 
     }
 }
