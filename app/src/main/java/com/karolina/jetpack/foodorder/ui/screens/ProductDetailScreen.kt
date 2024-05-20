@@ -64,7 +64,12 @@ fun ProductDetailScreen(
     ) {
         ProductHeader()
         ProductImage(image = data.item.image)
-        ProductDetail(item = data.item, alreadyAdded = data.alreadyAdded)
+        ProductDetail(
+            item = data.item,
+            alreadyAdded = data.alreadyAdded,
+            onItemAdd = onItemAdd,
+            onGoToShoppingBag = onGoToShoppingBag
+        )
     }
 }
 

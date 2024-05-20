@@ -35,7 +35,7 @@ import com.karolina.jetpack.foodorder.ui.theme.Green800
 
 @Composable
 fun StartScreen(
-    onLoginClick: () -> Unit = {}
+    onStartClick: () -> Unit = {}
 ) {
     val image = ImageBitmap.imageResource(id = R.drawable.start_screen_background)
 
@@ -76,7 +76,7 @@ fun StartScreen(
                 .height(48.dp),
             shape = RoundedCornerShape(20),
             colors = ButtonDefaults.buttonColors(Green800),
-            onClick = { onLoginClick() }
+            onClick = { onStartClick() }
         ) {
             val iconArrow = ImageVector.vectorResource(id = R.drawable.ic_arrow_right)
             Row(verticalAlignment = Alignment.CenterVertically) {
