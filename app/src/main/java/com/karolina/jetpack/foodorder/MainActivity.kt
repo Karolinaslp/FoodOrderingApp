@@ -1,23 +1,15 @@
 package com.karolina.jetpack.foodorder
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import androidx.navigation.navOptions
 import com.karolina.jetpack.foodorder.ui.screens.HomeScreen
 import com.karolina.jetpack.foodorder.ui.screens.LoginScreen
@@ -148,23 +140,21 @@ fun NavigationComponent(
         composable(route = "order_history") {
             val orderHistory = vm.orderHistory
 
-            if (orderHistory != null) {
-                OrderHistoryScreen(
-                    data = orderHistory,
-                    onEmptyHistoryClick = {
-                        navController.navigate(
-                            route = "home",
-                            navOptions {
-                                popUpTo("order_history") {
-                                    inclusive = true
-                                }
+            OrderHistoryScreen(
+                data = orderHistory,
+                onEmptyHistoryClick = {
+                    navController.navigate(
+                        route = "home",
+                        navOptions {
+                            popUpTo("order_history") {
+                                inclusive = true
                             }
-                        )
-                    }
-                )
-            }
+                        }
+                    )
+                }
+            )
         }
-        
+
         composable(route = "map") {
             val mapData = vm.mapDetail
 
